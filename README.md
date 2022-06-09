@@ -1,5 +1,4 @@
-# estimationsChromePlugin
-Estimations extension for Microsoft Planner
+# Microsoft Planner Estimation Plugin
 
 This extension sums up numbers given in the title of Microsoft Planner cards
 This is a plugin for Microsoft Planner which allows you to organize tasks as cards in multiple columns.

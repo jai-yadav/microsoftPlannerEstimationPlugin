@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
 
-  "name": "Estimations Plugin for Microsoft Planner",
+  "name": "Microsoft Planner Estimation Plugin",
   "description": "This extension sums up numbers given in the title of Microsoft Planner cards",
-  "version": "1.63",
-  "short_name" : "Planner Estimations",
+  "version": "1.0",
+  "short_name" : "MPEstimation",
 
-  "author": "Dirk Räbiger, Pablo Rivero, cmerodio@github.com",
+  "author": "Dirk Räbiger, Pablo Rivero, cmerodio@github.com, Jai Yadav",
   "icons": { "128" : "icon.png" },
 
   "content_scripts": [

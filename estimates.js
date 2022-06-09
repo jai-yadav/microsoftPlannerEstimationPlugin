@@ -1,5 +1,7 @@
 setInterval(function() {
 // setTimeout(function() {
+	let topHeaderSection = document.querySelector(".topHeader .topHeaderLandmark .nonIcon>div .primarySection>.contextInfoSectionContainer");
+
 	const columns = document.querySelectorAll(".PlannerRoot .tasksBoardPage .taskBoardColumn");
 	columns.forEach(function(column) {
 		let columnTitleSection = column.querySelector(".columnHeader .titleSection");
@@ -113,6 +115,7 @@ setInterval(function() {
 			originalEstimateEl.style.margin = "3px";
 			originalEstimateEl.textContent = sumColumnOriginalEstimate;
 			sumHtml.appendChild(originalEstimateEl);
+			column.setAttribute('data-value-original', sumColumnOriginalEstimate);
 		}
 
 		if(hasRemainingSum) {
@@ -122,6 +125,7 @@ setInterval(function() {
 			remainEstimateEl.style.margin = "3px";
 			remainEstimateEl.textContent = sumColumnRemainingEstimate;
 			sumHtml.appendChild(remainEstimateEl);
+			column.setAttribute('data-value-remaining', sumColumnRemainingEstimate);
 		}
 		const estimatesPluginDiv = columnTitleSection.querySelector(".colEstimatesPlugin");
 		if(estimatesPluginDiv) {
@@ -130,4 +134,47 @@ setInterval(function() {
 		columnTitleSection.appendChild(sumHtml)
 	});
 
- }, 3000);
+if (topHeaderSection !== null) {
+	let sumHtml = document.createElement("div");
+	sumHtml.classList.add("bootstrap-iso");
+	sumHtml.classList.add("colEstimatesPluginTotal");
+
+	let totalOriginalEstimate = 0;
+	let totalRemainingEstimate = 0;
+
+	columns.forEach(function(column) {
+		let orignalValue = column.getAttribute('data-value-original');
+		let remainingValue = column.getAttribute('data-value-remaining');
+		if(orignalValue){
+			totalOriginalEstimate += parseFloat(orignalValue);
+		}
+		if(remainingValue){
+			totalRemainingEstimate += parseFloat(remainingValue);
+		}
+	});
+
+	let totalOriginalEstimateEl = document.createElement("div");
+	totalOriginalEstimateEl.classList.add("label");
+	totalOriginalEstimateEl.classList.add("label-default");
+	totalOriginalEstimateEl.style.margin = "3px";
+	totalOriginalEstimateEl.setAttribute("data-value", totalOriginalEstimate);
+	totalOriginalEstimateEl.textContent = totalOriginalEstimate;
+	sumHtml.appendChild(totalOriginalEstimateEl);
+
+	let totalRemainEstimateEl = document.createElement("div");
+	totalRemainEstimateEl.classList.add("label");
+	totalRemainEstimateEl.classList.add("label-info");
+	totalRemainEstimateEl.style.margin = "3px";
+	totalRemainEstimateEl.setAttribute("data-value", totalRemainingEstimate);
+	totalRemainEstimateEl.textContent = totalRemainingEstimate;
+	sumHtml.appendChild(totalRemainEstimateEl);
+
+
+	const estimatesPluginDiv = topHeaderSection.querySelector(".colEstimatesPluginTotal");
+	if(estimatesPluginDiv) {
+		estimatesPluginDiv.remove();
+	}
+	topHeaderSection.appendChild(sumHtml)
+}
+
+}, 3000);
